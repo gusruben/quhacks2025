@@ -89,14 +89,18 @@
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({transcription: "I have to do some math homework, today, by 12:00pm. Also, I think... I have to send in my math homework by next Tuesday."}),
+            body: JSON.stringify({transcription: "I have to do some math homework, today, by 12:00pm. Also, I think... I have to send in like a week."}),
         });
-        console.log(response);
+        response.text().then(e => {
+            console.log(JSON.parse(e));
+            $todos = JSON.parse(e).body.data;
+
+        });
     });
 </script>
 
-<div id="body-flex" class="flex flex-col gap-8 justify-center w-full h-full">
-    <button 
+<div id="body-flex" class="flex flex-col gap-8 justify-center w-full h-full bg-[url(https://cloud-jwyrbzm5a-hack-club-bot.vercel.app/0bg.png)]">
+    <button
         id="mic-icon" 
         on:click={testBase64} 
         class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full w-48 h-48 bg-orange-400">
