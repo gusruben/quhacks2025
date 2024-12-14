@@ -4,6 +4,23 @@
 
     let todoByDates = {};
 
+    const finishTodo = (todo) => {
+        console.log(todo);
+    };
+
+    const updateTodos = () => {
+        let todoByDates = {};
+
+        for (let todo of todos) {
+            let dstring = new Date(todo.due).setHours(0, 0, 0, 0);
+            if (dstring in todoByDates) {
+                todoByDates[dstring].push(todo);
+            } else {
+                todoByDates[dstring] = [todo];
+            }
+        }
+    }
+
     let todos = [{
         name: "Do laundry",
         description: "Flip the laundry",
@@ -49,16 +66,7 @@
     }];
 
     onMount(() => {
-        for (let todo of todos) {
-            let dstring = new Date(todo.due).setHours(0, 0, 0, 0);
-            if (dstring in todoByDates) {
-                todoByDates[dstring].push(todo);
-            } else {
-                todoByDates[dstring] = [todo];
-            }
-        }
-        
-        console.log(todoByDates)
+        updateTodos();
     })
     
 </script>
@@ -75,7 +83,7 @@
                 <div class="w-full h-1 rounded-full" style="background: linear-gradient(90deg, #808080 0%, #4A4A4A 100%); box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.25);"></div>
             </div>
             {#each todoByDates[date].sort((a, b) => a.priority - b.priority) as todo}
-                <Todo todo={todo} />
+                <Todo onDelete={() => {finishTodo(todo)}} todo={todo} />
             {/each}
         {/each}
 
