@@ -14,7 +14,35 @@
     }, {
         name: "Dont Do laundry",
         description: "Dont Flip the laundry",
+        due: new Date(Date.now()-100000000),
+        duration: 5,
+        priority: 2,
+        tags: ["PERSONAL"]
+    }, {
+        name: "Do laundry",
+        description: "Flip the laundry",
         due: new Date(Date.now()),
+        duration: 10,
+        priority: 4,
+        tags: ["PERSONAL"]
+    }, {
+        name: "Dont Do laundry",
+        description: "Dont Flip the laundry",
+        due: new Date(Date.now()-100000000),
+        duration: 5,
+        priority: 2,
+        tags: ["PERSONAL"]
+    }, {
+        name: "Do laundry",
+        description: "Flip the laundry",
+        due: new Date(Date.now()),
+        duration: 10,
+        priority: 4,
+        tags: ["PERSONAL"]
+    }, {
+        name: "Dont Do laundry",
+        description: "Dont Flip the laundry",
+        due: new Date(Date.now()-100000000),
         duration: 5,
         priority: 2,
         tags: ["PERSONAL"]
@@ -35,25 +63,34 @@
     
 </script>
 
-<div class="flex flex-col justify-between h-screen w-screen bg-[#222] bg-pixel-pattern text-white">
-    <div class="flex justify-between h-16 items-center"> 
-        <div class="font-inter font-bold text-3xl m-6"> Tasks </div>
-    </div>
+<div class="flex flex-col justify-between h-screen w-screen bg-[#222] bg-pixel-pattern text-white font-inter">
+    <div class="grow relative items-center flex flex-col px-8 overflow-y-scroll">
+        <div class="flex justify-between h-16 self-start"> 
+            <div class="font-inter font-bold text-4xl my-6 "> Tasks </div>
+        </div>
 
-    <div class="grow relative">
-        {#each Object.keys(todoByDates).sort((a, b) => parseInt(b) - parseInt(a)) as date}
-            {new Date(parseInt(date)).toString().slice(0, 15)}
+        {#each Object.keys(todoByDates).sort((a, b) => parseInt(a) - parseInt(b)) as date}
+            <div class="font-inter text-xl font-bold w-full flex flex-col pt-8 pb-3">
+                <span>{new Date(parseInt(date)).toString().slice(0, 3)}</span>
+                <div class="w-full h-1 rounded-full" style="background: linear-gradient(90deg, #808080 0%, #4A4A4A 100%); box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.25);"></div>
+            </div>
             {#each todoByDates[date].sort((a, b) => a.priority - b.priority) as todo}
                 <Todo todo={todo} />
             {/each}
         {/each}
 
-        <!-- Didn't feel like looking up how to center ts so i jus added all the tags with the word center -->
-        <div class="absolute right-4 bottom-4 w-12 h-12 text-center justify-center items-center content-center align-middle bg-[#3F3F3F80] backdrop-blur-3xl rounded-full" style="filter: drop-shadow(0px 0px 10px #FFFFFF1A); box-shadow: inset 0px 0px 10px #FFFFFF1A;"><span>+</span></div>
+        <!-- Please ignore this -->
+        <div class="fixed right-4 bottom-28 w-16 h-16 flex justify-center items-center bg-[#3F3F3F80] backdrop-blur-3xl rounded-full" style="fill: radial-gradient(92.33% 172.67% at 49.74% 142%, rgba(122, 122, 122, 0.70) 0%, rgba(102, 102, 102, 0.00) 77.45%), rgba(77, 77, 77, 0.50); box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.10) inset; filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.30)); backdrop-filter: blur(25px);"><img class="w-6 h-6" src="/plus-icon.svg" alt="new todo icon"/></div>
     </div>
         
-    <div class="flex justify-between h-14 items-center">
-        <div>Tasks</div>
-        <div>Microphone</div>
+    <div class="absolute bottom-0 right-0 w-full flex justify-between h-24 items-center p-2 gap-2">
+        <div class="bg-[#3F3F3F80] w-full h-full backdrop-blur-3xl rounded-lg text-center flex flex-col items-center justify-center font-light" style="box-shadow: 0px 0px 16px 0px rgba(255, 255, 255, 0.08), 0px 0px 20px 0px rgba(255, 255, 255, 0.10) inset; background: radial-gradient(92.33% 172.67% at 49.74% 142%, rgba(160, 160, 160, 0.70) 0%, rgba(102, 102, 102, 0.00) 77.45%), rgba(63, 63, 63, 0.50);">
+            <img src="/michaelphone.svg" alt="microphone" />
+            <div>Tasks</div>
+        </div>
+        <div class="bg-[#3F3F3F80] w-full h-full backdrop-blur-3xl rounded-lg text-center flex flex-col items-center justify-center font-light" style="box-shadow: 0px 0px 16px 0px rgba(255, 255, 255, 0.08), 0px 0px 20px 0px rgba(255, 255, 255, 0.10) inset;">
+            <img src="/michaelphone.svg" alt="microphone" />
+            <div>Microphone</div>
+        </div>
     </div>
 </div>
