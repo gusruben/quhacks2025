@@ -1,17 +1,19 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import Todo from "../../components/Todo.svelte";
+    import { todos } from "../../stores";
 
     let todoByDates = {};
 
     const finishTodo = (todo) => {
-        console.log(todo);
+        $todos.splice($todos.indexOf(todo), 1)
+        updateTodos();
     };
 
     const updateTodos = () => {
-        let todoByDates = {};
+        todoByDates = {};
 
-        for (let todo of todos) {
+        for (let todo of $todos) {
             let dstring = new Date(todo.due).setHours(0, 0, 0, 0);
             if (dstring in todoByDates) {
                 todoByDates[dstring].push(todo);
@@ -19,51 +21,9 @@
                 todoByDates[dstring] = [todo];
             }
         }
-    }
 
-    let todos = [{
-        name: "Do laundry",
-        description: "Flip the laundry",
-        due: new Date(Date.now()),
-        duration: 10,
-        priority: 4,
-        tags: ["PERSONAL"]
-    }, {
-        name: "Dont Do laundry",
-        description: "Dont Flip the laundry",
-        due: new Date(Date.now()-100000000),
-        duration: 5,
-        priority: 2,
-        tags: ["PERSONAL"]
-    }, {
-        name: "Do laundry",
-        description: "Flip the laundry",
-        due: new Date(Date.now()),
-        duration: 10,
-        priority: 4,
-        tags: ["PERSONAL"]
-    }, {
-        name: "Dont Do laundry",
-        description: "Dont Flip the laundry",
-        due: new Date(Date.now()-100000000),
-        duration: 5,
-        priority: 2,
-        tags: ["PERSONAL"]
-    }, {
-        name: "Do laundry",
-        description: "Flip the laundry",
-        due: new Date(Date.now()),
-        duration: 10,
-        priority: 4,
-        tags: ["PERSONAL"]
-    }, {
-        name: "Dont Do laundry",
-        description: "Dont Flip the laundry",
-        due: new Date(Date.now()-100000000),
-        duration: 5,
-        priority: 2,
-        tags: ["PERSONAL"]
-    }];
+        todoByDates = todoByDates;
+    }
 
     onMount(() => {
         updateTodos();
@@ -86,6 +46,8 @@
                 <Todo onDelete={() => {finishTodo(todo)}} todo={todo} />
             {/each}
         {/each}
+
+        <div class="w-full mt-28"></div>
 
         <!-- Please ignore this -->
         <div class="fixed right-4 bottom-28 w-16 h-16 flex justify-center items-center bg-[#3F3F3F80] backdrop-blur-3xl rounded-full" style="fill: radial-gradient(92.33% 172.67% at 49.74% 142%, rgba(122, 122, 122, 0.70) 0%, rgba(102, 102, 102, 0.00) 77.45%), rgba(77, 77, 77, 0.50); box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.10) inset; filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.30)); backdrop-filter: blur(25px);"><img class="w-6 h-6" src="/plus-icon.svg" alt="new todo icon"/></div>
