@@ -1,5 +1,5 @@
 <script>
-	import EmailPasswordForm from "../../components/+EmailPasswordForm.svelte";
+	import EmailPasswordForm from "../../components/EmailPasswordForm.svelte";
 
 </script>
 
