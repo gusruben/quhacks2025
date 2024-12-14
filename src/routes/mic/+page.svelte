@@ -21,7 +21,7 @@
                 text = media.length.toString();
             }
             mediaRecorder.start(MS_INTERVAL);
-        })
+        });
         .catch(err => {
             console.error("Error accessing media devices.", err);
             text = "Error accessing microphone";
