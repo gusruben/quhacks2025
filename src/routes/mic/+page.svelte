@@ -1,4 +1,5 @@
 <script>
+	import Navbar from './../../components/Navbar.svelte';
     // @ts-ignore
     export const CLIP_LEN = 60; // multiplied by MS_INTERVAL
     export const MS_INTERVAL = 1000;
@@ -89,22 +90,22 @@
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({transcription: "I have to do some math homework, today, by 12:00pm. Also, I think... I have to send in like a week."}),
+            body: JSON.stringify({transcription: "I have to do some math homework, today, by 12:00pm. Also, I think... I have to send in forms like a week."}),
         });
         response.text().then(e => {
             console.log(JSON.parse(e));
-            $todos = JSON.parse(e).body.data;
+            //$todos = JSON.parse(e).body.data;
 
         });
     });
 </script>
 
-<div id="body-flex" class="flex flex-col gap-8 justify-center w-full h-full bg-[url(https://cloud-jwyrbzm5a-hack-club-bot.vercel.app/0bg.png)]">
+<div id="body-flex" class="flex flex-col gap-8 justify-center w-full h-full">
     <button
         id="mic-icon" 
         on:click={testBase64} 
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full w-48 h-48 bg-orange-400">
-        Save Base64
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full w-full h-auto bg-[url(https://cloud-41lt4kmt2-hack-club-bot.vercel.app/0ball.png)] [background-size:100%] bg-no-repeat h-[100%] ">
+        <Navbar page={false}></Navbar>
     </button>
     <div id="debug" class="text-2xl text-center">
         {text}
@@ -112,5 +113,8 @@
 </div>
 
 <style>
-    /* Add any necessary styles here */
+    :global(body) {
+        background-image: url(https://cloud-jwyrbzm5a-hack-club-bot.vercel.app/0bg.png);
+        background-size: cover;
+    }
 </style>
