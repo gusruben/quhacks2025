@@ -1,5 +1,6 @@
 <script>
 	import Navbar from './../../components/Navbar.svelte';
+	import { todos } from './../../stores.ts';
     // @ts-ignore
     export const CLIP_LEN = 60; // multiplied by MS_INTERVAL
     export const MS_INTERVAL = 1000;
@@ -94,8 +95,14 @@
         });
         response.text().then(e => {
             console.log(JSON.parse(e));
-            //$todos = JSON.parse(e).body.data;
-
+            for (let todo in JSON.parse(e)) {
+                $todos.push({
+                    name: todo.task_name,
+                    description: todo.task_description,
+                    due: new Date(Date.now()),
+                    duration: 120,
+                })
+            }
         });
     });
 </script>
