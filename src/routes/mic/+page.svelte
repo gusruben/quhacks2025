@@ -21,7 +21,7 @@
                 text = media.length.toString();
             }
             mediaRecorder.start(MS_INTERVAL);
-        });
+        })
         .catch(err => {
             console.error("Error accessing media devices.", err);
             text = "Error accessing microphone";
@@ -82,8 +82,16 @@
         }
     }
 
-    onMount(() => {
+    onMount(async () => {
         askPermission();
+        let response = await fetch("/api", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({transcription: "I have to do some math homework, today, by 12:00pm. Also, I think... I have to send in my math homework by next Tuesday."}),
+        });
+        console.log(response);
     });
 </script>
 
