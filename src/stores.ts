@@ -2,46 +2,18 @@ import { writable } from 'svelte/store';
 
 export const todos = writable(
     [{
-        name: "Do laundry",
-        description: "Flip the laundry",
+        name: "Math homework",
+        description: "Complete math homework",
         due: new Date(Date.now()),
+        duration: 30,
+        priority: 4,
+        tags: ["PERSONAL"]
+    }, {
+        name: "Submit forms",
+        description: "Submit forms one week from now",
+        due: new Date(Date.now()+1000000000),
         duration: 10,
-        priority: 4,
-        tags: ["PERSONAL"]
-    }, {
-        name: "Dont Do laundry",
-        description: "Dont Flip the laundry",
-        due: new Date(Date.now()-100000000),
-        duration: 3,
         priority: 2,
         tags: ["PERSONAL"]
-    }, {
-        name: "Do laundry",
-        description: "Flip the laundry",
-        due: new Date(Date.now()),
-        duration: 18,
-        priority: 4,
-        tags: ["PERSONAL"]
-    }, {
-        name: "Dont Do laundry",
-        description: "Dont Flip the laundry",
-        due: new Date(Date.now()-100000000),
-        duration: 1,
-        priority: 2,
-        tags: ["PERSONAL"]
-    }, {
-        name: "Do laundry",
-        description: "Flip the laundry",
-        due: new Date(Date.now()),
-        duration: 15,
-        priority: 4,
-        tags: ["PERSONAL"]
-    }, {
-        name: "Dont Do laundry",
-        description: "Dont Flip the laundry",
-        due: new Date(Date.now()-100000000),
-        duration: 85,
-        priority: 2,
-        tags: ["PERSONAL"]
-    }]
-);
+    }
+]);

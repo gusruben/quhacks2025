@@ -1,4 +1,5 @@
 <script>
+	import { todos } from './../../stores.ts';
     // @ts-ignore
     export const CLIP_LEN = 60; // multiplied by MS_INTERVAL
     export const MS_INTERVAL = 1000;
@@ -89,12 +90,18 @@
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({transcription: "I have to do some math homework, today, by 12:00pm. Also, I think... I have to send in like a week."}),
+            body: JSON.stringify({transcription: "I have to do some math homework, today, by 12:00pm. Also, I think... I have to send in forms like a week."}),
         });
         response.text().then(e => {
             console.log(JSON.parse(e));
-            $todos = JSON.parse(e).body.data;
-
+            for (let todo in JSON.parse(e)) {
+                $todos.push({
+                    name: todo.task_name,
+                    description: todo.task_description,
+                    due: new Date(Date.now()),
+                    duration: 120,
+                })
+            }
         });
     });
 </script>
